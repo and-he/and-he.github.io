@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="css/bulma.css" />
 		<link rel="stylesheet" href="css/elements.css" />
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
 	</head>
 	<body>
 		<div id="vue-target">
@@ -30,8 +31,8 @@
 			<nav class="level">
 				<div class="level-item has-text-centered">
 					<div class="select is-rounded">
-						<select v-model="region_model">
-							<option @click="update_chart(region_model)" v-for="region in regions">
+						<select v-model="region_model" v-on:change="update_chart(region_model)">
+							<option v-for="region in regions">
 								{{region}}
 							</option>
 						</select>
@@ -80,6 +81,6 @@
 			</section>
 		</div>
 	</body>
-	<script src="js/vue.js"></script>
+	<!-- <script src="js/vue.min.js"></script> -->
 	<script src="js/index.js"></script>
 </html>
