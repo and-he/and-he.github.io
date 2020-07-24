@@ -7,6 +7,15 @@
 // -a chart that contains the three: positive cases vs hospitalized vs icu
 // -a chart that contains the three: positive vs recovered vs death
 
+// LET'S IMPLEMENT AN OPTION FOR COMPARING TWO REGIONS AT A TIME
+// SO WE WILL NEED ANOTHER COPY OF THE FOLLOWING:
+// -dates, deaths, positives, recoveries, daily deaths, daily positives, cumulative chart, and daily chart
+// populate those variables with default values from the covid_url constant
+// for the html, we want to render a check button, where if it is checked, we want to display the new charts and options for that chart
+
+//SMALL THINGS TO FIX:
+//-the ordering of the labels when you hover over the dataset should match the height of each line
+
 let dates = [],
 	deaths = [],
 	hospitalizations = [],
@@ -177,70 +186,76 @@ let daily_config = {
 
 // getData(covid_url, deathChart);
 
+
+//the regions dictionary will have the full name as a key and the abbreviation as a value
+//we will display the values, and on the method calls, we will convert the value to the corresponding key
 var app = new Vue({
 	el: "#vue-target",
 	data: {
-		regions: [
-			"US",
-			"AK",
-			"AL",
-			"AR",
-			"AZ",
-			"CA",
-			"CO",
-			"CT",
-			"DE",
-			"FL",
-			"GA",
-			"HI",
-			"IA",
-			"ID",
-			"IL",
-			"IN",
-			"KS",
-			"KY",
-			"LA",
-			"MA",
-			"MD",
-			"ME",
-			"MI",
-			"MN",
-			"MO",
-			"MS",
-			"MT",
-			"NC",
-			"ND",
-			"NE",
-			"NH",
-			"NJ",
-			"NM",
-			"NV",
-			"NY",
-			"OH",
-			"OK",
-			"OR",
-			"PA",
-			"RI",
-			"SC",
-			"SD",
-			"TN",
-			"TX",
-			"UT",
-			"VA",
-			"VT",
-			"WA",
-			"WI",
-			"WV",
-			"WY",
-		],
+		locations: {"United States": "US", 
+			"Alabama": "AL",
+			"Alaska": "AK",
+			"Arizona": "AZ",
+			"Arkansas": "AR",
+			"California": "CA",
+			"Colorado": "CO",
+			"Connecticut": "CT",
+			"Delaware": "DE",
+			"Florida": "FL",
+			"Georgia": "GA",
+			"Hawaii": "HI",
+			"Idaho": "ID",
+			"Illinois": "IL",
+			"Indiana": "IN",
+			"Iowa": "IA",
+			"Kansas": "KS",
+			"Kentucky": "KY",
+			"Louisiana": "LA",
+			"Maine": "ME",
+			"Maryland": "MD",
+			"Massachusetts": "MA",
+			"Michigan": "MI",
+			"Minnesota": "MN",
+			"Mississippi": "MS",
+			"Missouri": "MO",
+			"Montana": "MT",
+			"Nebraska": "NE",
+			"Nevada": "NV",
+			"New Hampshire": "NH",
+			"New Jersey": "NJ",
+			"New Mexico": "NM",
+			"New York": "NY",
+			"North Carolina": "NC",
+			"North Dakota": "ND",
+			"Ohio": "OH",
+			"Oklahoma": "OK",
+			"Oregon": "OR",
+			"Pennsylvania": "PA",
+			"Rhode Island": "RI",
+			"South Carolina": "SC",
+			"South Dakota": "SD",
+			"Tennessee": "TN",
+			"Texas": "TX",
+			"Utah": "UT",
+			"Vermont": "VT",
+			"Virginia": "VA",
+			"Washington": "WA",
+			"West Virginia": "WV",
+			"Wisconsin": "WI",
+			"Wyoming": "WY"
+		},
 		showDropdown: false,
-		region_model: "US",
+		region_model: "United States",
 	},
 	methods: {
 		toggleMenu: function () {
 			this.showDropdown = !this.showDropdown;
 		},
 		update_chart: function (chosen_region) {
+			// the region will be the full name, which is the key
+			// so we need to first get the abbreviation, which is the associated value
+			console.log(`The chosen region is ${chosen_region}`)
+			chosen_region = this.locations[chosen_region]
 			chosen_region = chosen_region.toLowerCase();
 			end_bit = "";
 			if (chosen_region === "") {

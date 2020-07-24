@@ -32,8 +32,8 @@
 				<div class="level-item has-text-centered">
 					<div class="select is-rounded">
 						<select v-model="region_model" v-on:change="update_chart(region_model)">
-							<option v-for="region in regions">
-								{{region}}
+							<option v-for="(full_name, abbreviation) in locations">
+								{{abbreviation}}
 							</option>
 						</select>
 					</div>
