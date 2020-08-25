@@ -465,10 +465,11 @@ var app = new Vue({
 			if (chosen_region === "") {
 				chosen_region = "us";
 			} else if (chosen_region !== "us") {
-				chosen_region = "v1/states/" + chosen_region;
+				chosen_region = "states/" + chosen_region;
 				end_bit = ".json";
 			}
-			base_url = `https://covidtracking.com/api/${chosen_region}/daily${end_bit}`;
+			// base_url = `https://covidtracking.com/api/${chosen_region}/daily${end_bit}`;
+			base_url = `https://api.covidtracking.com/v1/${chosen_region}/daily.json`;
 			console.log(base_url);
 			getData(base_url);
 		},
