@@ -37,7 +37,7 @@ let dates2 = [],
 	dailyPositives2 = [];
 
 
-const covid_url = "https://covidtracking.com/api/us/daily";
+const covid_url = "https://api.covidtracking.com/v1/us/daily.json";
 
 //primary/left charts
 let cumulativeChart,
